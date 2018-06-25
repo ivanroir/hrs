@@ -15,7 +15,7 @@ class Index extends Component {
             <Switch>
                 <Route path="/" component={ LoginPage } exact/> 
                 <Route path="/TimeCard" component={ TimeCard } exact />    
-                <Route path="/dashboard" component={ Home } exact />             
+                <Route path="/Dashboard" component={ Home } exact />             
                 <Route path="/401" component={ Error401 } exact /> 
                 <Route component={ Error404 } />
             </Switch>

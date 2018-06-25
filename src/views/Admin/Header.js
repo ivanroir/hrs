@@ -109,7 +109,7 @@ const styles = theme => ({
     },
     content: {
         flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: "#F6EDF0",
         padding: theme.spacing.unit * 3,
     },
     rightToolbar: {
@@ -189,8 +189,9 @@ class Home extends Component {
                                 <Notifications />
                             </IconButton>
                         </section>
+                        <Typography type="title" style={{ borderCollapse: "separate", borderSpacing: "0", borderLeft: '0.1em solid silver', padding: '1.5em' }}/>
 
-                        <Typography type="title" style={{ borderLeft: '0.1em solid silver', padding: '0.5em' }}>
+                        <Typography type="title">
                             {this.state.firstname}
                         </Typography>
 
@@ -223,7 +224,7 @@ class Home extends Component {
                             </Menu>
                         </div>
 
-                        <section style={{ marginLeft: 40, marginRight: 50 }}>
+                        <section style={{ marginLeft: 0, marginRight: 50 }}>
                             <Avatar alt="Remy Sharp" src={displayPicture} className={classes.avatar} />
                         </section>
                     </Toolbar>
@@ -235,7 +236,7 @@ class Home extends Component {
                     }}
                     open={this.state.open} >
                     <div className={classes.toolbar} >
-                        <img src={logo} style={{ display: "flex", width: "50%", margin: "auto", left: "50%" }} />
+                        <img src={logo} style={{ display: "flex", width: "40%", margin: "auto", left: "50%" }} />
                         <IconButton onClick={this.handleDrawerClose} style={{ color: '#FDFDFD' }}>
                             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                         </IconButton>
