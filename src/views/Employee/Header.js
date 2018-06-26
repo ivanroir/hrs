@@ -18,6 +18,8 @@ import Notifications from '@material-ui/icons/Notifications';
 import Chat from '@material-ui/icons/Chat';
 import Settings from '@material-ui/icons/Settings';
 
+import { decodeToken } from '../../config/Token';
+
 import Avatar from '@material-ui/core/Avatar';
 import displayPicture from "../../assets/img/avatar.jpg";
 import ExpandMore from '@material-ui/icons/ExpandMore';

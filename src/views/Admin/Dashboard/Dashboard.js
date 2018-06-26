@@ -16,7 +16,7 @@ const styles = theme => ({
     },
     card: {
         padding: theme.spacing.unit * 2,
-        height: 250,
+        height: 180,
     },
     bullet: {
         display: 'inline-block',
@@ -39,7 +39,7 @@ const styles = theme => ({
 
     cardDisplay: {
         position: "relative",
-        top: 30,
+        top: 0,
         left: 25,
     },
 
@@ -59,7 +59,7 @@ class Dashboard extends Component {
                             <CardContent>
 
                                 <div className={classes.controls}>
-                                    <Group style={{ width: 120, height: 120, position: "relative", right: "20px", top: "50px", color: "#FDFDFD" }} />
+                                    <Group style={{ width: 120, height: 120, position: "relative", right: "20px",  color: "#FDFDFD" }} />
                                     <div className={classes.cardDisplay}>
                                         <Typography variant="title" component="h2" style={{ color: "white", margin: "auto", textAlign: "right", }} >
                                             0
@@ -89,7 +89,7 @@ class Dashboard extends Component {
                             <CardContent>
 
                                 <div className={classes.controls}>
-                                    <Block style={{ width: 120, height: 120, position: "relative", right: "20px", top: "50px", color: "#FDFDFD" }} />
+                                    <Block style={{ width: 120, height: 120, position: "relative", right: "20px",  color: "#FDFDFD" }} />
 
 
                                     <div className={classes.cardDisplay}>
@@ -110,7 +110,7 @@ class Dashboard extends Component {
                         <Card className={classes.card} style={{ backgroundColor: "#10621E" }}>
                             <CardContent>
                                 <div className={classes.controls}>
-                                    <Warning style={{ width: 120, height: 120, position: "relative", right: "20px", top: "50px", color: "#FDFDFD" }} />
+                                    <Warning style={{ width: 120, height: 120, position: "relative", right: "20px",  color: "#FDFDFD" }} />
                                     <div className={classes.cardDisplay}>
                                         <Typography variant="title" component="h2" style={{ color: "white", margin: "auto", textAlign: "right", }} >
                                             0
@@ -128,7 +128,7 @@ class Dashboard extends Component {
                         <Card className={classes.card} style={{ backgroundColor: "#661141" }}>
                             <CardContent>
                                 <div className={classes.controls}>
-                                    <Error style={{ width: 120, height: 120, position: "relative", right: "20px", top: "50px", color: "#FDFDFD" }} />
+                                    <Error style={{ width: 120, height: 120, position: "relative", right: "20px",  color: "#FDFDFD" }} />
                                     <div className={classes.cardDisplay}>
                                         <Typography variant="title" component="h2" style={{ color: "white", margin: "auto", textAlign: "right", }} >
                                             0
