@@ -24,25 +24,22 @@ import displayPicture from "../../assets/img/avatar.jpg";
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Dashboard from './Dashboard/Dashboard';
+import Row1 from './Dashboard/Row1';
+
+
+import Error404 from './../../views/Error/404.js';
+
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const drawerWidth = 300;
 
 const options = [
-    'None',
-    'Atria',
-    'Callisto',
-    'Dione',
-    'Ganymede',
-    'Hangouts Call',
-    'Luna',
-    'Oberon',
-    'Phobos',
-    'Pyxis',
-    'Sedna',
-    'Titania',
-    'Triton',
-    'Umbriel',
-  ];
+    'Home',
+    'Settings',
+    'Notification',
+    'Logout',
+];
 
 const ITEM_HEIGHT = 48;
 
@@ -156,102 +153,110 @@ class Home extends Component {
         const { anchorEl } = this.state;
 
         return (
-            <div className={classes.root}>
-                <AppBar
-                    position="absolute"
-                    className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
-                >
+            <Router>
+                <div className={classes.root}>
+                    <AppBar
+                        position="absolute"
+                        className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
+                    >
 
-                    <Toolbar disableGutters={!this.state.open}>
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={this.handleDrawerOpen}
-                            className={classNames(classes.menuButton, this.state.open && classes.hide)}
-                            style={{ color: '#21292B' }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="title" color="inherit" noWrap>
-                            Mini variant drawer
-                        </Typography>
-                        <section className={classes.rightToolbar}>
-
-                            <IconButton>
-                                <Settings />
-                            </IconButton>
-
-                            <IconButton>
-                                <Chat />
-                            </IconButton>
-
-                            <IconButton>
-                                <Notifications />
-                            </IconButton>
-                        </section>
-                        <Typography type="title" style={{ borderCollapse: "separate", borderSpacing: "0", borderLeft: '0.1em solid silver', padding: '1.5em' }}/>
-
-                        <Typography type="title">
-                            {this.state.firstname}
-                        </Typography>
-
-
-                        <div>
+                        <Toolbar disableGutters={!this.state.open}>
                             <IconButton
-                                aria-label="More"
-                                aria-owns={anchorEl ? 'long-menu' : null}
-                                aria-haspopup="true"
-                                onClick={this.handleClick}
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={this.handleDrawerOpen}
+                                className={classNames(classes.menuButton, this.state.open && classes.hide)}
+                                style={{ color: '#21292B' }}
                             >
-                                <ExpandMore />
+                                <MenuIcon />
                             </IconButton>
-                            <Menu
-                                id="long-menu"
-                                anchorEl={anchorEl}
-                                open={Boolean(anchorEl)}
-                                onClose={this.handleClose}
-                                PaperProps={{
-                                    style: {
-                                        maxHeight: ITEM_HEIGHT * 4.5,
-                                        width: 200,
-                                    },
-                                }} >
-                                {options.map(option => (
-                                    <MenuItem key={option} selected={option === 'Pyxis'} onClick={this.handleClose}>
-                                        {option}
-                                    </MenuItem>
-                                ))}
-                            </Menu>
+                            {/* <Typography variant="title" color="inherit" noWrap>
+                                Mini variant drawer
+                            </Typography> */}
+                            <section className={classes.rightToolbar}>
+
+                                <IconButton>
+                                    <Settings />
+                                </IconButton>
+
+                                <IconButton>
+                                    <Chat />
+                                </IconButton>
+
+                                <IconButton>
+                                    <Notifications />
+                                </IconButton>
+                            </section>
+                            <Typography type="title" style={{ borderCollapse: "separate", borderSpacing: "0", borderLeft: '0.1em solid silver', padding: '1.5em' }} />
+
+                            <Typography type="title">
+                                {this.state.firstname}
+                            </Typography>
+
+
+                            <div>
+                                <IconButton
+                                    aria-label="More"
+                                    aria-owns={anchorEl ? 'long-menu' : null}
+                                    aria-haspopup="true"
+                                    onClick={this.handleClick}
+                                >
+                                    <ExpandMore />
+                                </IconButton>
+                                <Menu
+                                    id="long-menu"
+                                    anchorEl={anchorEl}
+                                    open={Boolean(anchorEl)}
+                                    onClose={this.handleClose}
+                                    PaperProps={{
+                                        style: {
+                                            maxHeight: ITEM_HEIGHT * 4.5,
+                                            width: 200,
+                                        },
+                                    }} >
+                                    {options.map(option => (
+                                        <MenuItem key={option} selected={option === 'Pyxis'} onClick={this.handleClose}>
+                                            {option}
+                                        </MenuItem>
+                                    ))}
+                                </Menu>
+                            </div>
+
+                            <section style={{ marginLeft: 0, marginRight: 50 }}>
+                                <Avatar alt="Remy Sharp" src={displayPicture} className={classes.avatar} />
+                            </section>
+                        </Toolbar>
+                    </AppBar>
+                    <Drawer
+                        variant="permanent"
+                        classes={{
+                            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                        }}
+                        open={this.state.open} >
+                        <div className={classes.toolbar} >
+                            <img src={logo} style={{ display: "flex", width: "40%", margin: "auto", left: "50%" }} />
+                            <IconButton onClick={this.handleDrawerClose} style={{ color: '#FDFDFD' }}>
+                                {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                            </IconButton>
                         </div>
+                        <Divider />
+                        <List>{mailFolderListItems}</List>
+                        <Divider />
+                        <List>{otherMailFolderListItems}</List>
+                    </Drawer>
 
-                        <section style={{ marginLeft: 0, marginRight: 50 }}>
-                            <Avatar alt="Remy Sharp" src={displayPicture} className={classes.avatar} />
-                        </section>
-                    </Toolbar>
-                </AppBar>
-                <Drawer
-                    variant="permanent"
-                    classes={{
-                        paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-                    }}
-                    open={this.state.open} >
-                    <div className={classes.toolbar} >
-                        <img src={logo} style={{ display: "flex", width: "40%", margin: "auto", left: "50%" }} />
-                        <IconButton onClick={this.handleDrawerClose} style={{ color: '#FDFDFD' }}>
-                            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                        </IconButton>
-                    </div>
-                    <Divider />
-                    <List>{mailFolderListItems}</List>
-                    <Divider />
-                    <List>{otherMailFolderListItems}</List>
-                </Drawer>
-                <main className={classes.content}>
+                    {/* Main Body Page */}
+                    <main className={classes.content}>
 
-                    <div className={classes.toolbar} />
-                    <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
-                </main>
-            </div>
+                        <div className={classes.toolbar} />
+                        <Switch>
+                            <Route path="/admin" component={Dashboard} exact />
+                            <Route path="/admin/Employee" component={Row1} exact />
+                            <Route component={Error404} exact />
+                        </Switch>
+                    </main>
+                </div>
+            </Router>
         );
     }
 }
