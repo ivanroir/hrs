@@ -14,7 +14,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 import logo from "../../assets/img/InventoBrandingLogo.svg"
-import { decodeToken } from '../../config/Token';
 import Notifications from '@material-ui/icons/Notifications';
 import Chat from '@material-ui/icons/Chat';
 import Settings from '@material-ui/icons/Settings';
@@ -25,9 +24,6 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Dashboard from './Dashboard/Dashboard';
-import Row1 from './Employee/Row1';
-import Timekeeping from './Timekeeping/Timekeeping';
-import Leave from './Leave/Leave';
 
 import Error404 from './../../views/Error/404.js';
 
@@ -252,10 +248,9 @@ class Home extends Component {
 
                         <div className={classes.toolbar} />
                         <Switch>
-                            <Route path="/admin" component={Dashboard} exact />
-                            <Route path="/admin/employee" component={Row1} exact />
-                            <Route path="/admin/timekeeping" component={Timekeeping} exact />
-                            <Route path="/admin/leave" component={Leave} exact />
+                            <Route path="/user" component={Dashboard} exact />
+                            {/* <Route path="/user/overtime" component={Timekeeping} exact />
+                            <Route path="/user/leave" component={Leave} exact /> */}
                             <Route component={Error404} exact />
                         </Switch>
                     </main>

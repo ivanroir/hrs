@@ -1,1 +1,1 @@
-export { default as Home } from "./Header";
+export { default as Admin } from "./Header";

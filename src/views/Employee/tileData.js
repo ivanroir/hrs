@@ -5,7 +5,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Dashboard from '@material-ui/icons/Dashboard';
 import WorkOff from '@material-ui/icons/Work';
-import Employee from '@material-ui/icons/AccountBox';
+import Alarm from '@material-ui/icons/AccessAlarm';
 import AccessTime from '@material-ui/icons/AccessTime';
 import MailIcon from '@material-ui/icons/Mail';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 export const mailFolderListItems = (
 
   <div>
-    <Link to="/admin" style={{ textDecoration: 'none' }}>
+    <Link to="/user" style={{ textDecoration: 'none' }}>
       <ListItem button>
         <ListItemIcon style={{ fill: '#FDFDFD' }}>
           <Dashboard />
@@ -26,23 +26,23 @@ export const mailFolderListItems = (
         <ListItemText primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Dashboard</Typography>} />
       </ListItem>
     </Link>
-    <Link to="/admin/employee" style={{ textDecoration: 'none' }}>
+    <Link to="/user/overtime" style={{ textDecoration: 'none' }}>
       <ListItem button>
         <ListItemIcon style={{ fill: '#FDFDFD' }}>
-          <Employee />
+          <Alarm />
         </ListItemIcon>
-        <ListItemText primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Employee</Typography>} />
+        <ListItemText primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Overtime Form</Typography>} />
       </ListItem>
     </Link>
-    <Link to="/admin/timekeeping" style={{ textDecoration: 'none' }}>
+    <Link to="/user/leave" style={{ textDecoration: 'none' }}>
       <ListItem button>
         <ListItemIcon style={{ fill: '#FDFDFD' }}>
-          <AccessTime />
+          <WorkOff />
         </ListItemIcon>
-        <ListItemText primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Time Keeping</Typography>} />
+        <ListItemText primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Leave Form</Typography>} />
       </ListItem>
     </Link>
-    <Link to="/admin/leave" style={{ textDecoration: 'none' }}>
+    <Link to="/user/leave" style={{ textDecoration: 'none' }}>
     <ListItem button>
       <ListItemIcon style={{ fill: '#FDFDFD' }}>
         <WorkOff />
