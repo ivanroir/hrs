@@ -20,7 +20,7 @@ import Chat from '@material-ui/icons/Chat';
 import Settings from '@material-ui/icons/Settings';
 
 import Avatar from '@material-ui/core/Avatar';
-import displayPicture from "../../assets/img/avatar.jpg";
+import displayPicture from "../../assets/img/avatar.svg";
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';

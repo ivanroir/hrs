@@ -3,7 +3,7 @@ import { Link, NavLink, Redirect } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import indigo from '@material-ui/core/colors/indigo';
 import image from "../../assets/img/bgLogin.jpg";
-import logo from "../../assets/img/avatar.jpg";
+import logo from "../../assets/img/avatar.svg";
 import ConfirmDialog from './ConfirmDialog';
 import { sendLog, getTimeCardConfig } from '../../config/Api';
 import { decodeToken } from '../../config/Token';
