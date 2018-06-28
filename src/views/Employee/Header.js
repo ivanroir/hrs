@@ -26,6 +26,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Dashboard from './Dashboard/Dashboard';
+import Leave from './Leave/LeaveForm';
 
 import Error404 from './../../views/Error/404.js';
 
@@ -107,7 +108,7 @@ const styles = theme => ({
     content: {
         flexGrow: 1,
         backgroundColor: "#F6EDF0",
-        padding: theme.spacing.unit * 3,
+        // padding: theme.spacing.unit * 3,
     },
     rightToolbar: {
         marginLeft: 'auto',
@@ -223,7 +224,7 @@ class Home extends Component {
                             </div>
 
                             <section style={{ marginLeft: 0, marginRight: 50 }}>
-                                <Avatar alt="Remy Sharp" src={displayPicture} className={classes.avatar} />
+                                <Avatar alt="Display Picture" src={displayPicture} className={classes.avatar} />
                             </section>
                         </Toolbar>
                     </AppBar>
@@ -251,8 +252,8 @@ class Home extends Component {
                         <div className={classes.toolbar} />
                         <Switch>
                             <Route path="/user" component={Dashboard} exact />
-                            {/* <Route path="/user/overtime" component={Timekeeping} exact />
-                            <Route path="/user/leave" component={Leave} exact /> */}
+                            {/* {/* <Route path="/user/overtime" component={Timekeeping} exact /> */}
+                            <Route path="/user/leave" component={Leave} exact />
                             <Route component={Error404} exact />
                         </Switch>
                     </main>

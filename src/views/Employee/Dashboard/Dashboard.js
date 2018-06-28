@@ -13,6 +13,7 @@ import { Group, Block, Error, Warning } from '@material-ui/icons';
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        padding: theme.spacing.unit * 3,
     },
     card: {
         padding: theme.spacing.unit * 2,

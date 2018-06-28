@@ -4,14 +4,14 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import indigo from '@material-ui/core/colors/indigo';
 import image from "../../assets/img/bgLogin.jpg";
 import logo from "../../assets/img/avatar.jpg";
-import ConfirmDialog  from './ConfirmDialog';
-import { sendLog, getTimeCardConfig }from '../../config/Api';
-import { decodeToken  } from '../../config/Token';
+import ConfirmDialog from './ConfirmDialog';
+import { sendLog, getTimeCardConfig } from '../../config/Api';
+import { decodeToken } from '../../config/Token';
 import Notif from './Notif';
 import Tooltip from '@material-ui/core/Tooltip';
 import TimeLogModal from './TimeLogModal';
 
-import { 
+import {
     Card, Button, CardContent,
     Avatar, Typography
 } from '@material-ui/core/';
@@ -29,10 +29,10 @@ class TimeCard extends Component {
         lastpunch: "",
         lastpunchdesc: "",
         lastpunchdt: "",
-        nextpunch:"",
+        nextpunch: "",
         nextpunchdesc: "",
         confirmDiaLog: "",
-        tccont:"",
+        tccont: "",
         msg: "",
         showMsg: "",
         statshowMsg: true,
@@ -43,14 +43,14 @@ class TimeCard extends Component {
         let target = e.target;
         let value = target.value;
         let name = target.name;
-        
+
         this.setState({
             [name]: value
-        })        
+        })
     }
 
     setNameAfterValidate = (props) => {
-        this.setState({props})
+        this.setState({ props })
     }
 
     handleLogout = (e) => {
@@ -61,7 +61,7 @@ class TimeCard extends Component {
 
     clearConfirmDialog = (e) => {
         //this.setState({msg:<Notif msg={this.state.msg}/>})
-        this.setState({confirmDiaLog:''});
+        this.setState({ confirmDiaLog: '' });
     }
 
     showTimeAttendance = (e) => {
@@ -72,98 +72,99 @@ class TimeCard extends Component {
 
     }
 
-    showConfirmTimeLog = (e, tag, desc) => {    
-        e.preventDefault(); 
+    showConfirmTimeLog = (e, tag, desc) => {
+        e.preventDefault();
         console.log("EXECUTING!");
         console.log(this.state.confirmDiaLog);
-        if(this.state.confirmDiaLog){
+        if (this.state.confirmDiaLog) {
             console.log("Clearing");
-            this.setState({confirmDiaLog:''});
-        }else{
+            this.setState({ confirmDiaLog: '' });
+        } else {
             console.log("CALLING");
-            this.setState({confirmDiaLog: 
-                <ConfirmDialog 
-                clear={(e)=>this.clearConfirmDialog(e)}
-                send={(e) =>this.handleTimeLog(e, tag)}
-                tag={tag} 
-                desc={desc}/>
+            this.setState({
+                confirmDiaLog:
+                    <ConfirmDialog
+                        clear={(e) => this.clearConfirmDialog(e)}
+                        send={(e) => this.handleTimeLog(e, tag)}
+                        tag={tag}
+                        desc={desc} />
             });
-        } 
+        }
     }
 
     handleUpdateTimeCardContent = (type_id) => {
-            //Temp
-            const theme = createMuiTheme({
-                palette: {
-                  primary: indigo,
-                },
-            });
+        //Temp
+        const theme = createMuiTheme({
+            palette: {
+                primary: indigo,
+            },
+        });
 
-            if(type_id===1){ //last TI
-                this.setState({
-                    tccont:<li style={{marginBottom: "5%", marginLeft: "-32%",}}>
-                    <Button style={{position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 2, this.state.nextpunchdesc)}>
-                    {this.state.nextpunchdesc}</Button>
-                    <Button style={{position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-out")}>
-                    {"Time-out"}</Button>
-                    </li>
-                })
-            }else if(type_id===2){ //last BO
-                this.setState({
-                    tccont:<li style={{marginBottom: "5%", marginLeft: "-32%",}}>
-                    <Button style={{position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 3, "Break-In")}>
-                    {this.state.nextpunchdesc}</Button>
-                    <Button style={{position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-out")}>
-                    {"Time-out"}</Button>
-                    </li>
-                })
-            }else if(type_id===3){
-                this.setState({
-                    tccont:<li style={{marginBottom: "5%", marginLeft: "-32%",}}>
-                    <Button style={{position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 2, "Break-Out")}>
-                    {"Break-Out"}</Button>
-                    <Button style={{position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-Out")}>
-                    {"Time-out"}</Button>
-                    </li>
-                })
-            }else if(type_id===4){
-                this.setState({
-                    tccont: <li style={{marginBottom: "5%"}}>
-                    <Button style={{position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 1, "Time-In")}>
+        if (type_id === 1) { //last TI
+            this.setState({
+                tccont: <li style={{ marginBottom: "5%", marginLeft: "-32%", }}>
+                    <Button style={{ position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 2, this.state.nextpunchdesc)}>
                         {this.state.nextpunchdesc}</Button>
-                    </li>
-                })
-            }else{
-                this.setState({
-                    tccont: <li style={{marginBottom: "5%"}}>
-                    <Button style={{position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 1, "Time-In")}>
+                    <Button style={{ position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-out")}>
+                        {"Time-out"}</Button>
+                </li>
+            })
+        } else if (type_id === 2) { //last BO
+            this.setState({
+                tccont: <li style={{ marginBottom: "5%", marginLeft: "-32%", }}>
+                    <Button style={{ position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 3, "Break-In")}>
+                        {this.state.nextpunchdesc}</Button>
+                    <Button style={{ position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-out")}>
+                        {"Time-out"}</Button>
+                </li>
+            })
+        } else if (type_id === 3) {
+            this.setState({
+                tccont: <li style={{ marginBottom: "5%", marginLeft: "-32%", }}>
+                    <Button style={{ position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 2, "Break-Out")}>
+                        {"Break-Out"}</Button>
+                    <Button style={{ position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-Out")}>
+                        {"Time-out"}</Button>
+                </li>
+            })
+        } else if (type_id === 4) {
+            this.setState({
+                tccont: <li style={{ marginBottom: "5%" }}>
+                    <Button style={{ position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 1, "Time-In")}>
+                        {this.state.nextpunchdesc}</Button>
+                </li>
+            })
+        } else {
+            this.setState({
+                tccont: <li style={{ marginBottom: "5%" }}>
+                    <Button style={{ position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 1, "Time-In")}>
                         {"Time-In"}</Button>
-                    </li>
-                })
-            }
-            //Temp
+                </li>
+            })
+        }
+        //Temp
     }
 
-    handleTimeLog = (e, tag) => {        
-        e.preventDefault();   
-        this.setState({msg:''});
+    handleTimeLog = (e, tag) => {
+        e.preventDefault();
+        this.setState({ msg: '' });
         console.log("Start of Log");
         // const logstat = sendLog(this.state.nextpunch); //Working
         const logstat = sendLog(tag);
         console.log(tag);
         logstat.then(response => {
-            console.log("FINISHED!"); 
+            console.log("FINISHED!");
             //console.log(this.state.nextpunch+ " --- " +response.log.log.last_punch);
             console.log(response);
             console.log("END OF FINISHED!");
             console.log("SHOWINNNNNNNNNNGGGGGGGGGGGGGGGGG!");
             this.setState({
-                confirmDiaLog:"",
+                confirmDiaLog: "",
                 lastpunch: response.log.log.last_punch, //response.last_punch,
                 lastpunchdesc: response.log.log.lastpunch_desc,
                 lastpunchdt: response.log.log.lastpunch_dt,
-                nextpunch:response.log.log.next_punch,
-                nextpunchdesc: response.log.log.nextpunch_desc,   
+                nextpunch: response.log.log.next_punch,
+                nextpunchdesc: response.log.log.nextpunch_desc,
                 msg: <Notif msg={response.msg} />,
                 showMsg: response.msg,
                 //statshowMsg: response.
@@ -176,16 +177,16 @@ class TimeCard extends Component {
 
     showTimeLog = (e) => {
         e.preventDefault();
-        
+
     }
 
-    componentWillMount(){
-        console.log("WILL MOUNT TIME CARD: "+this.state);
-        if(localStorage && localStorage.getItem('token')){
+    componentWillMount() {
+        console.log("WILL MOUNT TIME CARD: " + this.state);
+        if (localStorage && localStorage.getItem('token')) {
             console.log("I HAVE TOKEN IN TIME CARD!");
-            this.setState({auth: decodeToken(this.state)});   
+            this.setState({ auth: decodeToken(this.state) });
             const timedata = getTimeCardConfig(this.state);
-  
+
             timedata.then(response => {
                 console.log("THIS IS FOR THE TIME CARD STATE!!");
                 console.log(response);
@@ -194,76 +195,76 @@ class TimeCard extends Component {
                     lastpunch: response.last_punch,
                     lastpunchdesc: response.lastpunch_desc,
                     lastpunchdt: response.lastpunch_dt,
-                    nextpunch:response.next_punch,
+                    nextpunch: response.next_punch,
                     nextpunchdesc: response.nextpunch_desc,
                 });
                 console.log(response.lastpunch_desc);
-                if(response.last_punch)
-                    this.setState({showMsg:"Your Last Log ("+response.lastpunch_desc+") at "+response.lastpunch_dt});
-                    //Update Time Card Component
-                
+                if (response.last_punch)
+                    this.setState({ showMsg: "Your Last Log (" + response.lastpunch_desc + ") at " + response.lastpunch_dt });
+                //Update Time Card Component
+
                 //Temp
                 const theme = createMuiTheme({
                     palette: {
-                      primary: indigo,
+                        primary: indigo,
                     },
                 });
 
-                if(response.last_punch===1){ //last TI
+                if (response.last_punch === 1) { //last TI
                     this.setState({
-                        tccont:<li style={{marginBottom: "5%", marginLeft: "-32%",}}>
-                        <Button style={{position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 2, this.state.nextpunchdesc)}>
-                        {this.state.nextpunchdesc}</Button>
-                        <Button style={{position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-out")}>
-                        {"Time-out"}</Button>
+                        tccont: <li style={{ marginBottom: "5%", marginLeft: "-32%", }}>
+                            <Button style={{ position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 2, this.state.nextpunchdesc)}>
+                                {this.state.nextpunchdesc}</Button>
+                            <Button style={{ position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-out")}>
+                                {"Time-out"}</Button>
                         </li>
                     })
-                }else if(response.last_punch===2){ //last BO
+                } else if (response.last_punch === 2) { //last BO
                     this.setState({
-                        tccont:<li style={{marginBottom: "5%", marginLeft: "-32%",}}>
-                        <Button style={{position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 3, "Break-In")}>
-                        {this.state.nextpunchdesc}</Button>
-                        <Button style={{position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-out")}>
-                        {"Time-out"}</Button>
+                        tccont: <li style={{ marginBottom: "5%", marginLeft: "-32%", }}>
+                            <Button style={{ position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 3, "Break-In")}>
+                                {this.state.nextpunchdesc}</Button>
+                            <Button style={{ position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-out")}>
+                                {"Time-out"}</Button>
                         </li>
                     })
-                }else if(response.last_punch===3){
+                } else if (response.last_punch === 3) {
                     this.setState({
-                        tccont:<li style={{marginBottom: "5%", marginLeft: "-32%",}}>
-                        <Button style={{position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 2, "Break-Out")}>
-                        {"Break-Out"}</Button>
-                        <Button style={{position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-Out")}>
-                        {"Time-out"}</Button>
+                        tccont: <li style={{ marginBottom: "5%", marginLeft: "-32%", }}>
+                            <Button style={{ position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 2, "Break-Out")}>
+                                {"Break-Out"}</Button>
+                            <Button style={{ position: "relative", top: "50px", left: "20%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 4, "Time-Out")}>
+                                {"Time-out"}</Button>
                         </li>
                     })
-                }else if(response.last_punch===4){
+                } else if (response.last_punch === 4) {
                     this.setState({
-                        tccont: <li style={{marginBottom: "5%"}}>
-                        <Button style={{position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 1, "Time-In")}>
-                            {this.state.nextpunchdesc}</Button>
+                        tccont: <li style={{ marginBottom: "5%" }}>
+                            <Button style={{ position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 1, "Time-In")}>
+                                {this.state.nextpunchdesc}</Button>
                         </li>
                     })
-                }else{
+                } else {
                     this.setState({
-                        tccont: <li style={{marginBottom: "5%"}}>
-                        <Button style={{position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 1, "Time-In")}>
-                            {"Time-In"}</Button>
+                        tccont: <li style={{ marginBottom: "5%" }}>
+                            <Button style={{ position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", }, }} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e, 1, "Time-In")}>
+                                {"Time-In"}</Button>
                         </li>
                     })
                 }
                 //Temp
             });
-            
+
             //console.log(this.state);         
         }
-        else{
+        else {
             console.log("I DONT HAVE TOKEN IN TIME CARD!");
-            this.setState({auth: false});        
+            this.setState({ auth: false });
         }
     }
 
-    render(){
-        
+    render() {
+
         const styles = {
             root: {
                 flexGrow: 1,
@@ -281,7 +282,7 @@ class TimeCard extends Component {
                 backgroundColor: "transparent",
                 border: "none",
                 color: "white",
-                outline: "none",                
+                outline: "none",
                 fontSize: "1em",
                 fontWeight: 300,
                 paddingBottom: "10px",
@@ -302,11 +303,11 @@ class TimeCard extends Component {
                 marginRight: "-50%",
                 transform: "translate(-50%, -50%)",
             },
-            media: {      
+            media: {
                 height: 0,
                 paddingTop: '56.25%', // 16:9
             },
-              
+
             pageHeader: {
                 flex: 1,
                 minHeight: "100vh",
@@ -335,18 +336,18 @@ class TimeCard extends Component {
                 backgroundSize: "cover",
                 backgroundPosition: "top center",
                 overflow: "hidden",
-            },            
+            },
             inputIconsColor: {
                 color: "#495057",
             },
-            divider: {                
+            divider: {
                 marginBottom: "-50px",
                 marginTop: "20px",
                 textAlign: "center",
                 fontFamily: "SegoeUI, Segoe UI",
                 textTransform: "uppercase",
                 fontWeight: 400,
-              },
+            },
             cardImgTop: {
                 width: "100%",
                 borderTopLeftRadius: "calc(.25rem - 1px)",
@@ -359,9 +360,9 @@ class TimeCard extends Component {
                 justifyContent: "center !important"
             },
             buttonInfo: {
-                
-                position: "relative",    
-                top: "50px",        
+
+                position: "relative",
+                top: "50px",
                 left: "15%",
                 height: "50px",
                 width: "185px",
@@ -383,24 +384,24 @@ class TimeCard extends Component {
 
         return (
             <div style={styles.pageHeader}>
-               {this.state.msg}
+                {this.state.msg}
                 <div>
                     {this.state.confirmDiaLog}
-                    <Card style={styles.card}>       
-                        <div style={{display: 'flex', justifyContent: 'center', marginTop: "100px",}}>
+                    <Card style={styles.card}>
+                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: "100px", }}>
                             <Avatar alt="Logo" src={logo} style={styles.avatar} />
                         </div>
                         <div style={styles.divider}>
-                        <Typography variant="display1" style={{fontSize:"145%", paddingBottom:"5px"}} >{this.state.firstname} {/*this.state.middlename*/} {this.state.lastname}</Typography>
-                        <Typography variant="body1" >{this.state.postitle}</Typography>
-                        <Tooltip id="tooltip-top" title="Click to show your Time Log" placement="top">
-                        <Typography variant="body2" onClick={(e) => this.showTimeLog(e)}>
-                        {this.state.showMsg}</Typography></Tooltip>
+                            <Typography variant="display1" style={{ fontSize: "145%", paddingBottom: "5px" }} >{this.state.firstname} {/*this.state.middlename*/} {this.state.lastname}</Typography>
+                            <Typography variant="body1" >{this.state.postitle}</Typography>
+                            <Tooltip id="tooltip-top" title="Click to show your Time Log" placement="top">
+                                <Typography variant="body2" onClick={(e) => this.showTimeLog(e)}>
+                                    {this.state.showMsg}</Typography></Tooltip>
                         </div>
                         <CardContent>
-                            <ul style={{marginLeft: "13%", listStyleType: "none"}}>
-                            {this.state.tccont}
-                            {/* <li style={{marginBottom: "5%"}}>
+                            <ul style={{ marginLeft: "13%", listStyleType: "none" }}>
+                                {this.state.tccont}
+                                {/* <li style={{marginBottom: "5%"}}>
                             <Button style={{position: "relative", top: "50px", left: "15%", height: "50px", width: "185px", color: theme.palette.getContrastText("#A0446A"), backgroundColor: "#A0446A", '&:hover': { backgroundColor: "#A0446A", },}} variant="contained" color="secondary" onClick={(e) => this.showConfirmTimeLog(e)}>
                                     {this.state.nextpunchdesc}</Button>
                                 { <li style={{marginBottom: "5%", marginLeft: "-25%",}}>
@@ -411,17 +412,17 @@ class TimeCard extends Component {
                                 </li> }
                             </li> */}
                                 <li>
-                                <Link to="/" style={{ textDecoration: 'none' }}><Button style={styles.buttonInfo} variant="outlined"> Dashboard </Button></Link> </li>
+                                    <Link to="/" style={{ textDecoration: 'none' }}><Button style={styles.buttonInfo} variant="outlined"> Dashboard </Button></Link> </li>
                                 <li>
-                                <NavLink to="/" style={{position: "relative", top: "60px", left: "31%", textTransform: "uppercase", textDecoration: 'none', }} onClick={this.handleLogout}>
-                                    <Typography variant="caption">Logout</Typography>
-                                </NavLink> 
+                                    <NavLink to="/" style={{ position: "relative", top: "60px", left: "31%", textTransform: "uppercase", textDecoration: 'none', }} onClick={this.handleLogout}>
+                                        <Typography variant="caption">Logout</Typography>
+                                    </NavLink>
                                 </li>
                             </ul>
                         </CardContent>
                     </Card>
-                </div> 
-            </div>         
+                </div>
+            </div>
         )
     }
 }
